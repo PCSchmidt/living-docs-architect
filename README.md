@@ -2,7 +2,7 @@
 
 An observer + architect + remediation loop that treats architectural documentation as agent-managed state.
 
-**Status:** Scaffolding – Phase 0
+**Status:** Scaffolding – Phase 0 (family paused 2026-08-19)
 
 Built on Meridian’s gate + independent Evaluator contracts. High-confidence findings only become PR comments, issues, or living-doc edits.
 
