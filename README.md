@@ -2,9 +2,9 @@
 
 An observer + architect + remediation loop that treats architectural documentation as agent-managed state.
 
-**Status:** Scaffolding – Phase 0 (family paused 2026-08-19)
+**Status:** Phase 1 — rule set + gated findings
 
-Built on Meridian’s gate + independent Evaluator contracts. High-confidence findings only become PR comments, issues, or living-doc edits.
+Built on Meridian’s gate + independent Evaluator contracts. High-confidence findings only get `act: true`. Phase 1 does not watch git or open GitHub issues.
 
 ## Relation to Meridian
 
@@ -29,19 +29,38 @@ flowchart LR
     Fix --> Docs[Living docs store]
 ```
 
+## Develop
+
+```sh
+npm test
+npm run eval
+npm run scan
+```
+
+Requires Node.js 20+. No dependencies, no network.
+
 ## Planned phases
 
-1. Small rule set (layering, forbidden imports, required tests) on one public repo
+1. Small rule set (layering, forbidden imports, required tests) on one public fixture *(this increment)*
 2. Observer (local git or GitHub webhook)
-3. Architect agent → structured findings
+3. Architect agent → structured findings *(mechanical scan shipped; LLM later)*
 4. Remediation (comments / issues / ARCHITECTURE.md updates)
-5. Gate so only high-confidence findings act
-6. Dogfood on Meridian / HardPowerIntelligence / this family
+5. Gate so only high-confidence findings act *(this increment)*
+6. Dogfood on Meridian / this family — not HardPowerIntelligence until asked
 
 ## Public / unclassified data only
 
-Dogfood targets are your own public repos. No employer or program-of-record trees.
+Fixture target is [fixtures/sample-app](fixtures/sample-app). No employer or program-of-record trees.
 
 ## Current tree
 
-Phase 0 is documentation only.
+```
+CONTRACT.md
+SPEC.md
+rules/rules.json
+fixtures/sample-app/
+src/scan.js
+src/gate.js
+eval/cases.json
+tests/
+```

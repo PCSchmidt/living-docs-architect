@@ -1,0 +1,27 @@
+{
+  "name": "living-docs-architect",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Observer + architect + gated remediation for architectural documentation as agent-managed state.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "eval": "node eval/run.js",
+    "scan": "node src/run.js fixtures/sample-app"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PCSchmidt/living-docs-architect.git"
+  },
+  "homepage": "https://github.com/PCSchmidt/living-docs-architect",
+  "license": "MIT",
+  "keywords": [
+    "architecture",
+    "living-docs",
+    "meridian",
+    "portfolio-kit"
+  ]
+}

@@ -1,0 +1,199 @@
+{
+  "project": "living-docs-architect",
+  "runtime": "mechanical-architect",
+  "rubric": "https://github.com/PCSchmidt/portfolio-kit/blob/main/docs/EVAL_RUBRIC_TEMPLATE.md",
+  "target_gate_catch": 0.85,
+  "split": "held-out-fixtures",
+  "cases": [
+    {
+      "case_id": "LDA-001",
+      "kind": "good",
+      "failure_mode": null,
+      "expect_verdict": "pass",
+      "expect_act": true,
+      "finding": {
+        "id": "F1",
+        "rule_id": "LDA-LAYER",
+        "path": "src/domain/score.js",
+        "evidence": "../ui/view.js",
+        "severity": "high",
+        "confidence": 0.92,
+        "summary": "src/domain/score.js imports UI from domain"
+      }
+    },
+    {
+      "case_id": "LDA-002",
+      "kind": "good",
+      "failure_mode": null,
+      "expect_verdict": "pass",
+      "expect_act": true,
+      "finding": {
+        "id": "F2",
+        "rule_id": "LDA-IMPORT",
+        "path": "src/domain/score.js",
+        "evidence": "child_process",
+        "severity": "high",
+        "confidence": 0.9,
+        "summary": "src/domain/score.js imports child_process"
+      }
+    },
+    {
+      "case_id": "LDA-003",
+      "kind": "good",
+      "failure_mode": null,
+      "expect_verdict": "warn",
+      "expect_act": false,
+      "finding": {
+        "id": "F3",
+        "rule_id": "LDA-TEST",
+        "path": "src/domain/pure.js",
+        "evidence": "missing tests/pure.test.js",
+        "severity": "medium",
+        "confidence": 0.7,
+        "summary": "src/domain/pure.js has no tests/ sibling"
+      }
+    },
+    {
+      "case_id": "LDA-004",
+      "kind": "bad",
+      "failure_mode": "missing_id",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "finding": {
+        "rule_id": "LDA-LAYER",
+        "path": "src/domain/score.js",
+        "evidence": "../ui/view.js",
+        "severity": "high",
+        "confidence": 0.92,
+        "summary": "layering"
+      }
+    },
+    {
+      "case_id": "LDA-005",
+      "kind": "bad",
+      "failure_mode": "stub_as_done",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "finding": {
+        "id": "F5",
+        "rule_id": "LDA-LAYER",
+        "path": "src/domain/score.js",
+        "evidence": "TODO placeholder",
+        "severity": "high",
+        "confidence": 0.95,
+        "summary": "TODO fill this finding later"
+      }
+    },
+    {
+      "case_id": "LDA-006",
+      "kind": "bad",
+      "failure_mode": "extra_entity",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "finding": {
+        "id": "F6",
+        "rule_id": "LDA-LAYER",
+        "path": "src/domain/score.js",
+        "evidence": "F-35 overlay",
+        "severity": "high",
+        "confidence": 0.99,
+        "summary": "F-35 architecture leak"
+      }
+    },
+    {
+      "case_id": "LDA-007",
+      "kind": "bad",
+      "failure_mode": "extra_entity",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "finding": {
+        "id": "F7",
+        "rule_id": "LDA-IMPORT",
+        "path": "src/domain/score.js",
+        "evidence": "JPO inventory",
+        "severity": "high",
+        "confidence": 0.99,
+        "summary": "JPO import map"
+      }
+    },
+    {
+      "case_id": "LDA-008",
+      "kind": "bad",
+      "failure_mode": "low_confidence_act",
+      "expect_verdict": "warn",
+      "expect_act": false,
+      "finding": {
+        "id": "F8",
+        "rule_id": "LDA-LAYER",
+        "path": "src/domain/score.js",
+        "evidence": "../ui/view.js",
+        "severity": "high",
+        "confidence": 0.4,
+        "summary": "maybe a layering issue"
+      }
+    },
+    {
+      "case_id": "LDA-009",
+      "kind": "bad",
+      "failure_mode": "confidence_out_of_range",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "finding": {
+        "id": "F9",
+        "rule_id": "LDA-LAYER",
+        "path": "src/domain/score.js",
+        "evidence": "../ui/view.js",
+        "severity": "high",
+        "confidence": 1.5,
+        "summary": "overconfident layering"
+      }
+    },
+    {
+      "case_id": "LDA-010",
+      "kind": "bad",
+      "failure_mode": "missing_rule",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "finding": {
+        "id": "F10",
+        "path": "src/domain/score.js",
+        "evidence": "../ui/view.js",
+        "severity": "high",
+        "confidence": 0.92,
+        "summary": "layering without a rule"
+      }
+    },
+    {
+      "case_id": "LDA-011",
+      "kind": "bad",
+      "failure_mode": "stub_as_done",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "finding": {
+        "id": "F11",
+        "rule_id": "LDA-TEST",
+        "path": "src/domain/pure.js",
+        "evidence": "coming soon",
+        "severity": "high",
+        "confidence": 0.9,
+        "summary": "TBD tests"
+      }
+    },
+    {
+      "case_id": "LDA-012",
+      "kind": "bad",
+      "failure_mode": "extra_entity",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "finding": {
+        "id": "F12",
+        "rule_id": "LDA-LAYER",
+        "path": "src/domain/score.js",
+        "evidence": "classified overlay",
+        "severity": "high",
+        "confidence": 0.9,
+        "summary": "classified layering note"
+      }
+    }
+  ]
+}
