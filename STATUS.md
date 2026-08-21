@@ -1,6 +1,6 @@
 # Status
 
-**Phase:** 1 — rule set + gated findings
+**Phase:** 2 — local git observer
 **Date:** 2026-08-21
 **Family handoff:** [portfolio-kit docs/STATUS.md](https://github.com/PCSchmidt/portfolio-kit/blob/main/docs/STATUS.md)
 
@@ -9,16 +9,17 @@
 - CONTRACT/SPEC + three rules (LDA-LAYER, LDA-IMPORT, LDA-TEST)
 - Synthetic public fixture app
 - Mechanical scan + act gate
-- 12-case eval (`LDA-001`–`LDA-012`)
+- Local git observer (`src/observe.js`) — porcelain snapshot, JS scan trigger, GitHub writes refused
+- Eval `LDA-001`–`LDA-018`
 
 ## Last measured
 
-2026-08-21: `npm test` 4/4; D3 catch 1.0 (n=9); agreement 1.0; known-bad never `act`. Sample-app scan `act_n=2`.
+2026-08-21: `npm test` 9/9; D3 catch 1.0 (n=13); agreement 1.0; known-bad never `act`. Observer events never `act`.
 
 ## Not done
 
-- Git observer (Phase 2)
+- Architect structured findings from change events (Phase 3)
 - GitHub comments / ARCHITECTURE.md writes
 - LLM architect
 
-**Next:** Phase 2 local git observer. Do not start red/blue.
+**Next:** Phase 3 architect structured findings from change events. Do not start red/blue.

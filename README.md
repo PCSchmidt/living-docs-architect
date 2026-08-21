@@ -2,9 +2,9 @@
 
 An observer + architect + remediation loop that treats architectural documentation as agent-managed state.
 
-**Status:** Phase 1 — rule set + gated findings
+**Status:** Phase 2 — local git observer
 
-Built on Meridian’s gate + independent Evaluator contracts. High-confidence findings only get `act: true`. Phase 1 does not watch git or open GitHub issues.
+Built on Meridian’s gate + independent Evaluator contracts. High-confidence findings only get `act: true`. Phase 2 watches a local git worktree and never writes GitHub comments or issues.
 
 ## Relation to Meridian
 
@@ -35,16 +35,17 @@ flowchart LR
 npm test
 npm run eval
 npm run scan
+npm run observe
 ```
 
-Requires Node.js 20+. No dependencies, no network.
+Requires Node.js 20+. No dependencies, no network. `npm run observe` snapshots `git status` in the current tree. It refuses `--github-write`, `--comment`, and `--issue`.
 
 ## Planned phases
 
-1. Small rule set (layering, forbidden imports, required tests) on one public fixture *(this increment)*
-2. Observer (local git or GitHub webhook)
+2. Observer (local git) *(this increment; GitHub webhook later)*
 3. Architect agent → structured findings *(mechanical scan shipped; LLM later)*
 4. Remediation (comments / issues / ARCHITECTURE.md updates)
+5. Gate so only high-confidence findings act
 5. Gate so only high-confidence findings act *(this increment)*
 6. Dogfood on Meridian / this family — not HardPowerIntelligence until asked
 
@@ -61,6 +62,7 @@ rules/rules.json
 fixtures/sample-app/
 src/scan.js
 src/gate.js
+src/observe.js
 eval/cases.json
 tests/
 ```

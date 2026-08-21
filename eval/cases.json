@@ -194,6 +194,115 @@
         "confidence": 0.9,
         "summary": "classified layering note"
       }
+    },
+    {
+      "case_id": "LDA-013",
+      "kind": "good",
+      "failure_mode": null,
+      "expect_verdict": "pass",
+      "expect_act": false,
+      "event": {
+        "schema": "living-docs.change_event.v1",
+        "observed_at": "2026-08-21T20:00:00.000Z",
+        "repo": "/tmp/public-app",
+        "git": { "available": true, "branch": "main", "dirty": true },
+        "changes": [{ "status": "M", "path": "src/domain/score.js" }],
+        "js_changed": true,
+        "scan_triggered": true,
+        "github_write": false,
+        "webhook_posted": false
+      }
+    },
+    {
+      "case_id": "LDA-014",
+      "kind": "good",
+      "failure_mode": null,
+      "expect_verdict": "pass",
+      "expect_act": false,
+      "event": {
+        "schema": "living-docs.change_event.v1",
+        "observed_at": "2026-08-21T20:00:00.000Z",
+        "repo": "/tmp/public-app",
+        "git": { "available": true, "branch": "main", "dirty": true },
+        "changes": [{ "status": "M", "path": "README.md" }],
+        "js_changed": false,
+        "scan_triggered": false,
+        "github_write": false,
+        "webhook_posted": false
+      }
+    },
+    {
+      "case_id": "LDA-015",
+      "kind": "bad",
+      "failure_mode": "github_write",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "event": {
+        "schema": "living-docs.change_event.v1",
+        "observed_at": "2026-08-21T20:00:00.000Z",
+        "repo": "/tmp/public-app",
+        "git": { "available": true },
+        "changes": [],
+        "js_changed": false,
+        "scan_triggered": false,
+        "github_write": true,
+        "webhook_posted": false
+      }
+    },
+    {
+      "case_id": "LDA-016",
+      "kind": "bad",
+      "failure_mode": "webhook_posted",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "event": {
+        "schema": "living-docs.change_event.v1",
+        "observed_at": "2026-08-21T20:00:00.000Z",
+        "repo": "/tmp/public-app",
+        "git": { "available": true },
+        "changes": [],
+        "js_changed": false,
+        "scan_triggered": false,
+        "github_write": false,
+        "webhook_posted": true
+      }
+    },
+    {
+      "case_id": "LDA-017",
+      "kind": "bad",
+      "failure_mode": "extra_entity",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "event": {
+        "schema": "living-docs.change_event.v1",
+        "observed_at": "2026-08-21T20:00:00.000Z",
+        "repo": "/tmp/public-app",
+        "git": { "available": true },
+        "changes": [{ "status": "M", "path": "src/domain/score.js" }],
+        "js_changed": true,
+        "scan_triggered": true,
+        "github_write": false,
+        "webhook_posted": false,
+        "summary": "F-35 overlay"
+      }
+    },
+    {
+      "case_id": "LDA-018",
+      "kind": "bad",
+      "failure_mode": "bad_schema",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "event": {
+        "schema": "living-docs.change_event.v0",
+        "observed_at": "2026-08-21T20:00:00.000Z",
+        "repo": "/tmp/public-app",
+        "git": { "available": true },
+        "changes": [],
+        "js_changed": false,
+        "scan_triggered": false,
+        "github_write": false,
+        "webhook_posted": false
+      }
     }
   ]
 }

@@ -3,8 +3,8 @@
  * Fail-closed on stub language and forbidden program tokens.
  */
 
-const FORBIDDEN = /\b(F-?35|JPO|ITAR|CUI|classified)\b|employer inventory/i
-const STUB = /\b(TODO|TBD|placeholder|coming soon)\b/i
+export const FORBIDDEN = /\b(F-?35|JPO|ITAR|CUI|classified)\b|employer inventory/i
+export const STUB = /\b(TODO|TBD|placeholder|coming soon)\b/i
 
 function blobOf(finding) {
   return `${finding.summary || ''} ${finding.evidence || ''} ${finding.path || ''}`

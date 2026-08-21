@@ -45,3 +45,18 @@ Features as `##` headings, in priority order.
 - [x] `npm run eval` D3 catch ≥ 0.85 and agreement 1.0
 
 **Out of scope for this feature:** observer / remediation phases.
+
+## Feature: Local git observer
+
+**Gate:** evaluated
+**Acceptance:**
+
+- [x] `observeLocal` reads `git status --porcelain` in a worktree
+- [x] Emits `living-docs.change_event.v1` with `changes`, `js_changed`, `scan_triggered`
+- [x] Ignored paths (`.env`, `node_modules`, recovery codes) are dropped
+- [x] GitHub remotes are classified but never written
+- [x] `refuseGitHubWrite` throws; `--github-write` / `--comment` / `--issue` CLI flags fail closed
+- [x] Dirty JS may attach a gated scan; markdown-only dirt does not scan
+- [x] Eval cases `LDA-013`–`LDA-018` cover good events and write/token/schema failures
+
+**Out of scope for this feature:** GitHub webhooks, ARCHITECTURE.md writes.

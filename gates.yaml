@@ -5,7 +5,7 @@ version: "1.0"
 project:
   name: "living-docs-architect"
   recipe: "custom"
-  description: "Phase 1 freezes rules, scan, and gated findings"
+  description: "Phase 2 local git observer plus gated findings"
 
 gates:
   - id: confirmed

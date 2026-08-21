@@ -9,7 +9,7 @@
 
 ## Scope
 
-Scan a **public fixture tree** with a small architectural rule set. Produce structured findings. A Meridian-style gate decides which findings are allowed to **act** (would-be comment / issue / living-doc edit). Phase 1 freezes rules, finding JSON, and the gate. It does not watch git, open GitHub issues, or edit ARCHITECTURE.md.
+Scan a **public fixture tree** with a small architectural rule set. Produce structured findings. A Meridian-style gate decides which findings are allowed to **act** (would-be comment / issue / living-doc edit). Phase 2 adds a **local git observer** that emits change events. It does not open GitHub issues, post webhooks, or edit ARCHITECTURE.md.
 
 ### In scope
 
@@ -17,14 +17,16 @@ Scan a **public fixture tree** with a small architectural rule set. Produce stru
 - One public synthetic app under `fixtures/sample-app/`
 - Finding JSON: `id`, `rule_id`, `path`, `evidence`, `severity`, `confidence`
 - Gate: act only when `severity=high` and `confidence >= 0.8` and no extra-entity / stub language
-- Portfolio-kit D3 on known-bad architect outputs
+- Local git observer: porcelain snapshot → `living-docs.change_event.v1`
+- Scan trigger when observed JS files change
+- Portfolio-kit D3 on known-bad architect outputs and known-bad change events
 
 ### Out of scope
 
 - JPO / F-35 / employer trees
 - Replacing Claude Code / Cursor / Copilot
-- Git observer / GitHub webhooks *(Phase 2)*
-- Writing comments, issues, or ARCHITECTURE.md *(Phase 4)*
+- GitHub webhooks / GitHub comments / issues *(Phase 4)*
+- Writing ARCHITECTURE.md *(Phase 4)*
 - LLM architect *(mechanical rules only)*
 - redteam-blue-gate
 - Dogfood on HardPowerIntelligence

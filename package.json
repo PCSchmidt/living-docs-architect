@@ -7,7 +7,8 @@
   "scripts": {
     "test": "node --test tests/*.test.js",
     "eval": "node eval/run.js",
-    "scan": "node src/run.js fixtures/sample-app"
+    "scan": "node src/run.js fixtures/sample-app",
+    "observe": "node src/run.js --observe"
   },
   "engines": {
     "node": ">=20"

@@ -15,6 +15,6 @@
 ## Do not
 
 - Start redteam-blue-gate.
-- Open GitHub issues or edit ARCHITECTURE.md unless the user asked for Phase 4.
+- Open GitHub issues, post webhooks, or edit ARCHITECTURE.md unless the user asked for Phase 4.
 - Put JPO / F-35 content in fixtures except as known-bad eval strings.
-- Add an LLM architect in Phase 1.
+- Add an LLM architect in Phase 2.

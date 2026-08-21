@@ -8,6 +8,7 @@ import { readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { gateFinding } from '../src/gate.js'
+import { gateChangeEvent } from '../src/observe.js'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const DEFAULT_CASES = join(HERE, 'cases.json')
@@ -28,7 +29,7 @@ export function runEval(catalog, opts = {}) {
   let actHits = 0
 
   for (const testCase of catalog.cases) {
-    const gated = gateFinding(testCase.finding)
+    const gated = testCase.event ? gateChangeEvent(testCase.event) : gateFinding(testCase.finding)
     const agreed = verdictMatches(testCase.expect_verdict, gated.verdict)
       && gated.act === testCase.expect_act
     if (agreed) agreementHits += 1
@@ -70,7 +71,7 @@ export function runEval(catalog, opts = {}) {
     },
     target_gate_catch: catalog.target_gate_catch ?? 0.85,
     cases: rows,
-    next: 'Phase 2: local git observer. Do not start red/blue.',
+    next: 'Phase 3: architect structured findings from change events. Do not start red/blue.',
   }
   report.ok = (report.metrics.D3_gate_catch_rate ?? 0) >= report.target_gate_catch
     && report.metrics.verdict_agreement === 1
