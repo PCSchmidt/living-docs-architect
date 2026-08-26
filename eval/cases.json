@@ -444,6 +444,144 @@
         "github_write": false,
         "architecture_written": false
       }
+    },
+    {
+      "case_id": "LDA-026",
+      "kind": "good",
+      "failure_mode": null,
+      "expect_verdict": "pass",
+      "expect_act": false,
+      "expect_applied_n": 1,
+      "remediate": {
+        "dryRun": false,
+        "architect": {
+          "schema": "living-docs.architect_report.v1",
+          "verdict": "pass",
+          "repo": "/tmp/public-app",
+          "proposals": [{
+            "finding_id": "F1",
+            "rule_id": "LDA-LAYER",
+            "kind": "comment",
+            "target": "src/domain/score.js",
+            "body": "Remove UI import from domain",
+            "applied": false
+          }]
+        }
+      }
+    },
+    {
+      "case_id": "LDA-027",
+      "kind": "good",
+      "failure_mode": null,
+      "expect_verdict": "pass",
+      "expect_act": false,
+      "expect_applied_n": 0,
+      "remediate": {
+        "dryRun": true,
+        "architect": {
+          "schema": "living-docs.architect_report.v1",
+          "verdict": "pass",
+          "repo": "/tmp/public-app",
+          "proposals": [{
+            "finding_id": "F1",
+            "rule_id": "LDA-LAYER",
+            "kind": "comment",
+            "target": "src/domain/score.js",
+            "body": "Remove UI import from domain",
+            "applied": false
+          }]
+        }
+      }
+    },
+    {
+      "case_id": "LDA-028",
+      "kind": "bad",
+      "failure_mode": "github_write",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "remediation": {
+        "schema": "living-docs.remediation_report.v1",
+        "applied": [],
+        "applied_n": 0,
+        "github_write": true,
+        "comments_posted": true,
+        "architecture_written": false
+      }
+    },
+    {
+      "case_id": "LDA-029",
+      "kind": "bad",
+      "failure_mode": "architect_fail",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "expect_applied_n": 0,
+      "remediate": {
+        "dryRun": false,
+        "architect": {
+          "schema": "living-docs.architect_report.v1",
+          "verdict": "fail",
+          "repo": "/tmp/public-app",
+          "proposals": [{
+            "finding_id": "F1",
+            "rule_id": "LDA-LAYER",
+            "kind": "comment",
+            "target": "src/domain/score.js",
+            "body": "Remove UI import from domain",
+            "applied": false
+          }]
+        }
+      }
+    },
+    {
+      "case_id": "LDA-030",
+      "kind": "bad",
+      "failure_mode": "unsafe_path",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "expect_applied_n": 0,
+      "remediate": {
+        "dryRun": false,
+        "architect": {
+          "schema": "living-docs.architect_report.v1",
+          "verdict": "pass",
+          "repo": "/tmp/public-app",
+          "proposals": [{
+            "finding_id": "F9",
+            "rule_id": "LDA-LAYER",
+            "kind": "comment",
+            "target": "../secret.js",
+            "body": "escape",
+            "applied": false
+          }]
+        }
+      }
+    },
+    {
+      "case_id": "LDA-031",
+      "kind": "bad",
+      "failure_mode": "extra_entity",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "remediation": {
+        "schema": "living-docs.remediation_report.v1",
+        "applied": [],
+        "applied_n": 0,
+        "github_write": false,
+        "summary": "F-35 overlay"
+      }
+    },
+    {
+      "case_id": "LDA-032",
+      "kind": "bad",
+      "failure_mode": "bad_schema",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "remediation": {
+        "schema": "living-docs.remediation_report.v0",
+        "applied": [],
+        "applied_n": 0,
+        "github_write": false
+      }
     }
   ]
 }

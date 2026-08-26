@@ -9,7 +9,7 @@
 
 ## Scope
 
-Scan a **public fixture tree** with a small architectural rule set. Produce structured findings. A Meridian-style gate decides which findings are allowed to **act** (would-be comment / issue / living-doc edit). Phase 3 adds a **mechanical architect** that turns change events into unapplied remediation proposals. It does not open GitHub issues, post webhooks, or edit ARCHITECTURE.md.
+Scan a **public fixture tree** with a small architectural rule set. Produce structured findings. A Meridian-style gate decides which findings are allowed to **act** (would-be comment / issue / living-doc edit). Phase 4 applies gated proposals as **local** living-doc writes (`ARCHITECTURE.md`, `.living-docs/comments.jsonl`). It does not open GitHub issues or post webhooks.
 
 ### In scope
 
@@ -20,14 +20,14 @@ Scan a **public fixture tree** with a small architectural rule set. Produce stru
 - Local git observer: porcelain snapshot → `living-docs.change_event.v1`
 - Scan trigger when observed JS files change
 - Mechanical architect: change event + gated scan → `living-docs.architect_report.v1` with unapplied proposals
-- Portfolio-kit D3 on known-bad architect outputs, change events, and architect reports
+- Gated local remediation: `living-docs.remediation_report.v1` writes `ARCHITECTURE.md` and `.living-docs/comments.jsonl` only when the architect report passed
+- Portfolio-kit D3 on known-bad architect outputs, change events, architect reports, and remediation reports
 
 ### Out of scope
 
 - JPO / F-35 / employer trees
 - Replacing Claude Code / Cursor / Copilot
-- GitHub webhooks / GitHub comments / issues *(Phase 4)*
-- Writing ARCHITECTURE.md *(Phase 4)*
+- GitHub webhooks / GitHub comments / issues *(never live; local comment log only)*
 - LLM architect *(mechanical rules only)*
 - redteam-blue-gate
 - Dogfood on HardPowerIntelligence

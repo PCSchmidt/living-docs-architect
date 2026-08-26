@@ -78,7 +78,7 @@ test('non-git trees and ignored paths do not scan', () => {
 })
 
 test('GitHub writes and program tokens fail closed', () => {
-  assert.throws(() => refuseGitHubWrite('comment'), /does not write remediations/)
+  assert.throws(() => refuseGitHubWrite('comment'), /writes local files only/)
   const leaked = gateChangeEvent({
     schema: 'living-docs.change_event.v1',
     observed_at: '2026-08-21T20:00:00.000Z',

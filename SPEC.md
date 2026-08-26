@@ -73,3 +73,17 @@ Features as `##` headings, in priority order.
 - [x] Eval cases `LDA-019`–`LDA-025` cover proposals and known-bad reports
 
 **Out of scope for this feature:** posting comments/issues or writing ARCHITECTURE.md.
+
+## Feature: Gated local remediation
+
+**Gate:** evaluated
+**Acceptance:**
+
+- [x] `remediate` emits `living-docs.remediation_report.v1`
+- [x] Default CLI `--remediate` is dry-run; `--apply` writes local files
+- [x] `comment` proposals append `.living-docs/comments.jsonl` with `github: false`
+- [x] `architecture_md` proposals append `ARCHITECTURE.md`
+- [x] Failed architect reports, GitHub flags, and `../` targets fail closed
+- [x] Eval cases `LDA-026`–`LDA-032` cover apply, dry-run, and known-bad remediations
+
+**Out of scope for this feature:** GitHub comments, issues, webhooks, live GitHub API.

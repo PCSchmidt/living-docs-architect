@@ -2,9 +2,9 @@
 
 An observer + architect + remediation loop that treats architectural documentation as agent-managed state.
 
-**Status:** Phase 3 — architect structured findings
+**Status:** Phase 4 — gated local remediation
 
-Built on Meridian’s gate + independent Evaluator contracts. High-confidence findings only get `act: true`. Phase 3 turns local git change events into unapplied remediation proposals and never writes GitHub comments, issues, or ARCHITECTURE.md.
+Built on Meridian’s gate + independent Evaluator contracts. High-confidence findings only get `act: true`. Phase 4 applies gated proposals to local `ARCHITECTURE.md` and `.living-docs/comments.jsonl`. It never posts GitHub comments, issues, or webhooks.
 
 ## Relation to Meridian
 
@@ -37,13 +37,15 @@ npm run eval
 npm run scan
 npm run observe
 npm run architect
+npm run remediate
+npm run remediate:apply
 ```
 
-Requires Node.js 20+. No dependencies, no network. `npm run architect` observes the current tree and emits an unapplied proposal report. It refuses `--github-write`, `--comment`, and `--issue`.
+Requires Node.js 20+. No dependencies, no network. `npm run remediate` is dry-run. `npm run remediate:apply` writes local living-doc files. `--github-write`, `--comment`, and `--issue` are refused.
 
 ## Planned phases
-1. Small rule set (layering, forbidden imports, required tests) on one public fixture
-2. Observer (local git)
+1. Small rule set (layering, forbidden im(mechanical, no LLM)
+4. Remediation (local ARCHITECTURE.md / comment log) *(this increment)*
 3. Architect agent → structured findings *(this increment; mechanical, no LLM)*
 4. Remediation (comments / issues / ARCHITECTURE.md updates)
 5. Gate so only high-confidence findings act
@@ -64,6 +66,7 @@ src/scan.js
 src/gate.js
 src/observe.js
 src/architect.js
+src/remediate.js
 eval/cases.json
 tests/
 ```

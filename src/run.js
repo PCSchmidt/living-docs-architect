@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url'
 import { architectFromEvent } from './architect.js'
 import { gateReport } from './gate.js'
 import { observeLocal, refuseGitHubWrite } from './observe.js'
+import { remediate } from './remediate.js'
 import { scanWorkspace } from './scan.js'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
@@ -34,21 +35,39 @@ export function runArchitect(repo, opts = {}) {
   return architectFromEvent(event, { act_min_confidence: (opts.catalog ?? loadRules()).act_min_confidence })
 }
 
+export function runRemediate(repo, opts = {}) {
+  const architect = runArchitect(repo, opts)
+  return remediate(architect, {
+    repo: resolve(repo),
+    now: opts.now,
+    dryRun: opts.dryRun !== false && opts.apply !== true,
+    fs: opts.fs,
+  })
+}
+
 function parseArgs(argv) {
   const args = argv.slice(2)
   if (args.includes('--github-write') || args.includes('--comment') || args.includes('--issue')) {
     refuseGitHubWrite('cli')
   }
+  const apply = args.includes('--apply')
+  const remediateFlag = args.includes('--remediate')
   const architect = args.includes('--architect')
-  const observe = args.includes('--observe') || architect
-  const rest = args.filter((arg) => arg !== '--observe' && arg !== '--architect')
+  const observe = args.includes('--observe') || architect || remediateFlag
+  const rest = args.filter((arg) => !['--observe', '--architect', '--remediate', '--apply', '--dry-run'].includes(arg))
   const root = rest[0] || (observe ? process.cwd() : join(HERE, '..', 'fixtures', 'sample-app'))
-  return { architect, observe, root }
+  return { architect, observe, remediate: remediateFlag, apply, root }
 }
 
 function main() {
-  const { architect, observe, root } = parseArgs(process.argv)
-  const report = architect ? runArchitect(root) : observe ? runObserve(root) : runScan(root)
+  const { architect, observe, remediate: doRemediate, apply, root } = parseArgs(process.argv)
+  const report = doRemediate
+    ? runRemediate(root, { dryRun: !apply, apply })
+    : architect
+      ? runArchitect(root)
+      : observe
+        ? runObserve(root)
+        : runScan(root)
   process.stdout.write(`${JSON.stringify(report, null, 2)}\n`)
 }
 

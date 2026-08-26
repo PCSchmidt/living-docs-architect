@@ -9,7 +9,9 @@
     "eval": "node eval/run.js",
     "scan": "node src/run.js fixtures/sample-app",
     "observe": "node src/run.js --observe",
-    "architect": "node src/run.js --architect"
+    "architect": "node src/run.js --architect",
+    "remediate": "node src/run.js --remediate",
+    "remediate:apply": "node src/run.js --remediate --apply"
   },
   "engines": {
     "node": ">=20"

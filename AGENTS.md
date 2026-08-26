@@ -15,7 +15,7 @@
 ## Do not
 
 - Start redteam-blue-gate.
-- Open GitHub issues, post webhooks, or edit ARCHITECTURE.md unless the user asked for Phase 4.
+- Open GitHub issues or post webhooks. Phase 4 writes local files only.
 - Put JPO / F-35 content in fixtures except as known-bad eval strings.
-- Add an LLM architect in Phase 3.
-- Apply proposals or write ARCHITECTURE.md unless the user asked for Phase 4.
+- Add an LLM architect in Phase 4.
+- Run `--apply` against employer or program-of-record trees.

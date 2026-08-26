@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url'
 import { architectFromEvent, gateArchitectReport } from '../src/architect.js'
 import { gateFinding } from '../src/gate.js'
 import { gateChangeEvent } from '../src/observe.js'
+import { gateRemediationReport, remediate } from '../src/remediate.js'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const DEFAULT_CASES = join(HERE, 'cases.json')
@@ -30,17 +31,37 @@ export function runEval(catalog, opts = {}) {
   let actHits = 0
 
   for (const testCase of catalog.cases) {
-    const gated = testCase.report
-      ? gateArchitectReport(testCase.report)
-      : testCase.architect_event
-        ? architectFromEvent(testCase.architect_event)
-        : testCase.event
-          ? gateChangeEvent(testCase.event)
-          : gateFinding(testCase.finding)
+    const gated = testCase.remediation
+      ? gateRemediationReport(testCase.remediation)
+      : testCase.remediate
+        ? remediate(testCase.remediate.architect, {
+          repo: testCase.remediate.repo || '/tmp/public-app',
+          now: '2026-08-26T21:00:00.000Z',
+          dryRun: testCase.remediate.dryRun === true,
+          fs: {
+            mkdirSync() {},
+            readFileSync() {
+              const err = new Error('ENOENT')
+              err.code = 'ENOENT'
+              throw err
+            },
+            writeFileSync() {},
+          },
+        })
+        : testCase.report
+          ? gateArchitectReport(testCase.report)
+          : testCase.architect_event
+            ? architectFromEvent(testCase.architect_event)
+            : testCase.event
+              ? gateChangeEvent(testCase.event)
+              : gateFinding(testCase.finding)
     let agreed = verdictMatches(testCase.expect_verdict, gated.verdict)
       && gated.act === testCase.expect_act
     if (testCase.expect_proposal_n != null) {
       agreed = agreed && gated.proposal_n === testCase.expect_proposal_n
+    }
+    if (testCase.expect_applied_n != null) {
+      agreed = agreed && gated.applied_n === testCase.expect_applied_n
     }
     if (agreed) agreementHits += 1
     if (testCase.kind === 'bad') {
@@ -81,7 +102,7 @@ export function runEval(catalog, opts = {}) {
     },
     target_gate_catch: catalog.target_gate_catch ?? 0.85,
     cases: rows,
-    next: 'Phase 4: gated remediation writes. Do not start red/blue.',
+    next: 'Phase 5: dogfood on own public family repos. Do not start red/blue.',
   }
   report.ok = (report.metrics.D3_gate_catch_rate ?? 0) >= report.target_gate_catch
     && report.metrics.verdict_agreement === 1

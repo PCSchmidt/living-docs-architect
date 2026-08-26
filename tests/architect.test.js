@@ -100,8 +100,8 @@ test('applied proposals and GitHub writes fail closed', () => {
     architecture_written: true,
   })
   assert.equal(wrote.verdict, 'fail')
-  assert.throws(() => architectFromEvent(eventWithScan([], []), { githubWrite: true }), /does not write remediations/)
-  assert.throws(() => refuseGitHubWrite('issue'), /does not write remediations/)
+  assert.throws(() => architectFromEvent(eventWithScan([], []), { githubWrite: true }), /writes local files only/)
+  assert.throws(() => refuseGitHubWrite('issue'), /writes local files only/)
 })
 
 test('medium findings do not get proposals', () => {
