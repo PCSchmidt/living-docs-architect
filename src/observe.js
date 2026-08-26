@@ -78,11 +78,11 @@ function gitText(repo, args, runner) {
 }
 
 /**
- * Block any GitHub write API. Phase 2 is observe-only.
+ * Block any GitHub write API. Phase 3 still does not post.
  * @param {string} [action]
  */
 export function refuseGitHubWrite(action = 'write') {
-  const error = new Error(`GitHub ${action} refused: living-docs Phase 2 is local observe-only`)
+  const error = new Error(`GitHub ${action} refused: living-docs Phase 3 does not write remediations`)
   error.code = 'github_write_refused'
   throw error
 }

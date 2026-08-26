@@ -60,3 +60,16 @@ Features as `##` headings, in priority order.
 - [x] Eval cases `LDA-013`–`LDA-018` cover good events and write/token/schema failures
 
 **Out of scope for this feature:** GitHub webhooks, ARCHITECTURE.md writes.
+
+## Feature: Architect structured findings
+
+**Gate:** evaluated
+**Acceptance:**
+
+- [x] `architectFromEvent` emits `living-docs.architect_report.v1`
+- [x] Findings are scoped to changed JS paths on a passing change event
+- [x] Proposals exist only for gated `act` findings and stay `applied: false`
+- [x] GitHub writes, webhooks, and ARCHITECTURE.md writes fail closed
+- [x] Eval cases `LDA-019`–`LDA-025` cover proposals and known-bad reports
+
+**Out of scope for this feature:** posting comments/issues or writing ARCHITECTURE.md.

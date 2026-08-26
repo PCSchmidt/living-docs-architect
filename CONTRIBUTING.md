@@ -6,6 +6,7 @@ Contracts live in [portfolio-kit](https://github.com/PCSchmidt/portfolio-kit).
 npm test
 npm run eval
 npm run observe
+npm run architect
 ```
 
 Tests and eval must stay green. Do not require network in CI. Do not post GitHub comments from this repo.

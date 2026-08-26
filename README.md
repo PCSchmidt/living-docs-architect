@@ -2,9 +2,9 @@
 
 An observer + architect + remediation loop that treats architectural documentation as agent-managed state.
 
-**Status:** Phase 2 — local git observer
+**Status:** Phase 3 — architect structured findings
 
-Built on Meridian’s gate + independent Evaluator contracts. High-confidence findings only get `act: true`. Phase 2 watches a local git worktree and never writes GitHub comments or issues.
+Built on Meridian’s gate + independent Evaluator contracts. High-confidence findings only get `act: true`. Phase 3 turns local git change events into unapplied remediation proposals and never writes GitHub comments, issues, or ARCHITECTURE.md.
 
 ## Relation to Meridian
 
@@ -36,14 +36,15 @@ npm test
 npm run eval
 npm run scan
 npm run observe
+npm run architect
 ```
 
-Requires Node.js 20+. No dependencies, no network. `npm run observe` snapshots `git status` in the current tree. It refuses `--github-write`, `--comment`, and `--issue`.
+Requires Node.js 20+. No dependencies, no network. `npm run architect` observes the current tree and emits an unapplied proposal report. It refuses `--github-write`, `--comment`, and `--issue`.
 
 ## Planned phases
-
-2. Observer (local git) *(this increment; GitHub webhook later)*
-3. Architect agent → structured findings *(mechanical scan shipped; LLM later)*
+1. Small rule set (layering, forbidden imports, required tests) on one public fixture
+2. Observer (local git)
+3. Architect agent → structured findings *(this increment; mechanical, no LLM)*
 4. Remediation (comments / issues / ARCHITECTURE.md updates)
 5. Gate so only high-confidence findings act
 5. Gate so only high-confidence findings act *(this increment)*
@@ -63,6 +64,7 @@ fixtures/sample-app/
 src/scan.js
 src/gate.js
 src/observe.js
+src/architect.js
 eval/cases.json
 tests/
 ```

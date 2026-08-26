@@ -9,7 +9,7 @@
 
 ## Scope
 
-Scan a **public fixture tree** with a small architectural rule set. Produce structured findings. A Meridian-style gate decides which findings are allowed to **act** (would-be comment / issue / living-doc edit). Phase 2 adds a **local git observer** that emits change events. It does not open GitHub issues, post webhooks, or edit ARCHITECTURE.md.
+Scan a **public fixture tree** with a small architectural rule set. Produce structured findings. A Meridian-style gate decides which findings are allowed to **act** (would-be comment / issue / living-doc edit). Phase 3 adds a **mechanical architect** that turns change events into unapplied remediation proposals. It does not open GitHub issues, post webhooks, or edit ARCHITECTURE.md.
 
 ### In scope
 
@@ -19,7 +19,8 @@ Scan a **public fixture tree** with a small architectural rule set. Produce stru
 - Gate: act only when `severity=high` and `confidence >= 0.8` and no extra-entity / stub language
 - Local git observer: porcelain snapshot → `living-docs.change_event.v1`
 - Scan trigger when observed JS files change
-- Portfolio-kit D3 on known-bad architect outputs and known-bad change events
+- Mechanical architect: change event + gated scan → `living-docs.architect_report.v1` with unapplied proposals
+- Portfolio-kit D3 on known-bad architect outputs, change events, and architect reports
 
 ### Out of scope
 

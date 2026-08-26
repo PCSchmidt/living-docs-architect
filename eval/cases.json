@@ -303,6 +303,147 @@
         "github_write": false,
         "webhook_posted": false
       }
+    },
+    {
+      "case_id": "LDA-019",
+      "kind": "good",
+      "failure_mode": null,
+      "expect_verdict": "pass",
+      "expect_act": false,
+      "expect_proposal_n": 1,
+      "architect_event": {
+        "schema": "living-docs.change_event.v1",
+        "observed_at": "2026-08-26T12:00:00.000Z",
+        "repo": "/tmp/public-app",
+        "verdict": "pass",
+        "changes": [{ "status": "M", "path": "src/domain/score.js" }],
+        "js_changed": true,
+        "scan_triggered": true,
+        "github_write": false,
+        "webhook_posted": false,
+        "scan": {
+          "findings": [
+            {
+              "id": "F1",
+              "rule_id": "LDA-LAYER",
+              "path": "src/domain/score.js",
+              "evidence": "../ui/view.js",
+              "severity": "high",
+              "confidence": 0.92,
+              "summary": "src/domain/score.js imports UI from domain"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "LDA-020",
+      "kind": "good",
+      "failure_mode": null,
+      "expect_verdict": "pass",
+      "expect_act": false,
+      "expect_proposal_n": 0,
+      "architect_event": {
+        "schema": "living-docs.change_event.v1",
+        "observed_at": "2026-08-26T12:00:00.000Z",
+        "repo": "/tmp/public-app",
+        "verdict": "pass",
+        "changes": [{ "status": "M", "path": "README.md" }],
+        "js_changed": false,
+        "scan_triggered": false,
+        "github_write": false,
+        "webhook_posted": false,
+        "scan": {
+          "findings": [
+            {
+              "id": "F1",
+              "rule_id": "LDA-LAYER",
+              "path": "src/domain/score.js",
+              "evidence": "../ui/view.js",
+              "severity": "high",
+              "confidence": 0.92,
+              "summary": "src/domain/score.js imports UI from domain"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "LDA-021",
+      "kind": "bad",
+      "failure_mode": "github_write",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "report": {
+        "schema": "living-docs.architect_report.v1",
+        "findings": [],
+        "proposals": [],
+        "proposal_n": 0,
+        "github_write": true,
+        "comments_posted": true,
+        "architecture_written": false
+      }
+    },
+    {
+      "case_id": "LDA-022",
+      "kind": "bad",
+      "failure_mode": "architecture_written",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "report": {
+        "schema": "living-docs.architect_report.v1",
+        "findings": [],
+        "proposals": [],
+        "proposal_n": 0,
+        "github_write": false,
+        "architecture_written": true
+      }
+    },
+    {
+      "case_id": "LDA-023",
+      "kind": "bad",
+      "failure_mode": "proposal_applied",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "report": {
+        "schema": "living-docs.architect_report.v1",
+        "findings": [],
+        "proposals": [{ "finding_id": "F1", "applied": true, "kind": "comment", "target": "src/domain/score.js", "body": "remove UI import" }],
+        "proposal_n": 1,
+        "github_write": false,
+        "architecture_written": false
+      }
+    },
+    {
+      "case_id": "LDA-024",
+      "kind": "bad",
+      "failure_mode": "extra_entity",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "report": {
+        "schema": "living-docs.architect_report.v1",
+        "findings": [],
+        "proposals": [],
+        "proposal_n": 0,
+        "github_write": false,
+        "architecture_written": false,
+        "summary": "F-35 overlay"
+      }
+    },
+    {
+      "case_id": "LDA-025",
+      "kind": "bad",
+      "failure_mode": "bad_schema",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "report": {
+        "schema": "living-docs.architect_report.v0",
+        "findings": [],
+        "proposals": [],
+        "proposal_n": 0,
+        "github_write": false,
+        "architecture_written": false
+      }
     }
   ]
 }

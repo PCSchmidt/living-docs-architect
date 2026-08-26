@@ -7,6 +7,7 @@
 import { readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { architectFromEvent, gateArchitectReport } from '../src/architect.js'
 import { gateFinding } from '../src/gate.js'
 import { gateChangeEvent } from '../src/observe.js'
 
@@ -29,9 +30,18 @@ export function runEval(catalog, opts = {}) {
   let actHits = 0
 
   for (const testCase of catalog.cases) {
-    const gated = testCase.event ? gateChangeEvent(testCase.event) : gateFinding(testCase.finding)
-    const agreed = verdictMatches(testCase.expect_verdict, gated.verdict)
+    const gated = testCase.report
+      ? gateArchitectReport(testCase.report)
+      : testCase.architect_event
+        ? architectFromEvent(testCase.architect_event)
+        : testCase.event
+          ? gateChangeEvent(testCase.event)
+          : gateFinding(testCase.finding)
+    let agreed = verdictMatches(testCase.expect_verdict, gated.verdict)
       && gated.act === testCase.expect_act
+    if (testCase.expect_proposal_n != null) {
+      agreed = agreed && gated.proposal_n === testCase.expect_proposal_n
+    }
     if (agreed) agreementHits += 1
     if (testCase.kind === 'bad') {
       catchN += 1
@@ -71,7 +81,7 @@ export function runEval(catalog, opts = {}) {
     },
     target_gate_catch: catalog.target_gate_catch ?? 0.85,
     cases: rows,
-    next: 'Phase 3: architect structured findings from change events. Do not start red/blue.',
+    next: 'Phase 4: gated remediation writes. Do not start red/blue.',
   }
   report.ok = (report.metrics.D3_gate_catch_rate ?? 0) >= report.target_gate_catch
     && report.metrics.verdict_agreement === 1

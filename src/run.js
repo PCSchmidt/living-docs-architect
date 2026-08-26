@@ -2,6 +2,7 @@
 import { readFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { architectFromEvent } from './architect.js'
 import { gateReport } from './gate.js'
 import { observeLocal, refuseGitHubWrite } from './observe.js'
 import { scanWorkspace } from './scan.js'
@@ -28,20 +29,26 @@ export function runObserve(repo, opts = {}) {
   })
 }
 
+export function runArchitect(repo, opts = {}) {
+  const event = runObserve(repo, opts)
+  return architectFromEvent(event, { act_min_confidence: (opts.catalog ?? loadRules()).act_min_confidence })
+}
+
 function parseArgs(argv) {
   const args = argv.slice(2)
   if (args.includes('--github-write') || args.includes('--comment') || args.includes('--issue')) {
     refuseGitHubWrite('cli')
   }
-  const observe = args.includes('--observe')
-  const rest = args.filter((arg) => arg !== '--observe')
+  const architect = args.includes('--architect')
+  const observe = args.includes('--observe') || architect
+  const rest = args.filter((arg) => arg !== '--observe' && arg !== '--architect')
   const root = rest[0] || (observe ? process.cwd() : join(HERE, '..', 'fixtures', 'sample-app'))
-  return { observe, root }
+  return { architect, observe, root }
 }
 
 function main() {
-  const { observe, root } = parseArgs(process.argv)
-  const report = observe ? runObserve(root) : runScan(root)
+  const { architect, observe, root } = parseArgs(process.argv)
+  const report = architect ? runArchitect(root) : observe ? runObserve(root) : runScan(root)
   process.stdout.write(`${JSON.stringify(report, null, 2)}\n`)
 }
 

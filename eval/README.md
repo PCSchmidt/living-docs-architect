@@ -8,6 +8,6 @@ npm run eval
 ```
 
 - No network, no GitHub writes, no LLM
-- Cases: [cases.json](cases.json) (`LDA-001`–`LDA-018`)
-- Known-bad findings and change events must not `act`
-- Phase 2 events never set `github_write` or `webhook_posted` on a passing row
+- Cases: [cases.json](cases.json) (`LDA-001`–`LDA-025`)
+- Known-bad findings, change events, and architect reports must not `act`
+- Phase 3 proposals stay `applied: false`; no GitHub or ARCHITECTURE.md writes
