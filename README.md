@@ -47,7 +47,6 @@ Requires Node.js 20+. No dependencies, no network. `npm run architect` observes 
 3. Architect agent → structured findings *(this increment; mechanical, no LLM)*
 4. Remediation (comments / issues / ARCHITECTURE.md updates)
 5. Gate so only high-confidence findings act
-5. Gate so only high-confidence findings act *(this increment)*
 6. Dogfood on Meridian / this family — not HardPowerIntelligence until asked
 
 ## Public / unclassified data only
