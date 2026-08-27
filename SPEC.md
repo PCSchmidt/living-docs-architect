@@ -87,3 +87,16 @@ Features as `##` headings, in priority order.
 - [x] Eval cases `LDA-026`–`LDA-032` cover apply, dry-run, and known-bad remediations
 
 **Out of scope for this feature:** GitHub comments, issues, webhooks, live GitHub API.
+
+## Feature: Dogfood on own public family repos
+
+**Gate:** evaluated
+**Acceptance:**
+
+- [x] `dogfood` emits `living-docs.dogfood_report.v1`
+- [x] Default CLI `--dogfood` is dry-run; `--apply` is still local-only
+- [x] Allowlist is portfolio-kit + honesty-gate + bake-off + living-docs + Phase 0 siblings
+- [x] HardPowerIntelligence, Meridian, `deepseek-harness`, and F-35/JPO paths fail closed
+- [x] Eval cases `LDA-033`–`LDA-039` cover family dry-run and known-bad dogfood reports
+
+**Out of scope for this feature:** GitHub comments/issues/webhooks, HardPowerIntelligence, LLM architect, red/blue.

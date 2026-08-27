@@ -582,6 +582,116 @@
         "applied_n": 0,
         "github_write": false
       }
+    },
+    {
+      "case_id": "LDA-033",
+      "kind": "good",
+      "failure_mode": null,
+      "expect_verdict": "pass",
+      "expect_act": false,
+      "expect_applied_n": 0,
+      "expect_target_n": 2,
+      "expect_refused_n": 0,
+      "dogfood": {
+        "workspace": "/tmp/AIEngineeringProjects",
+        "dryRun": true,
+        "family_names": ["living-docs-architect", "portfolio-kit"]
+      }
+    },
+    {
+      "case_id": "LDA-034",
+      "kind": "good",
+      "failure_mode": null,
+      "expect_verdict": "pass",
+      "expect_act": false,
+      "expect_applied_n": 0,
+      "expect_target_n": 1,
+      "expect_refused_n": 0,
+      "dogfood": {
+        "workspace": "/tmp/AIEngineeringProjects",
+        "dryRun": true,
+        "repos": ["/tmp/AIEngineeringProjects/living-docs-architect"],
+        "family_names": ["living-docs-architect"]
+      }
+    },
+    {
+      "case_id": "LDA-035",
+      "kind": "bad",
+      "failure_mode": "not_family",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "expect_applied_n": 0,
+      "expect_target_n": 0,
+      "expect_refused_n": 1,
+      "dogfood": {
+        "workspace": "/tmp/AIEngineeringProjects",
+        "dryRun": true,
+        "repos": ["/tmp/AIEngineeringProjects/HardPowerIntelligence"],
+        "family_names": ["HardPowerIntelligence"]
+      }
+    },
+    {
+      "case_id": "LDA-036",
+      "kind": "bad",
+      "failure_mode": "github_write",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "dogfood_report": {
+        "schema": "living-docs.dogfood_report.v1",
+        "target_n": 1,
+        "requested_n": 0,
+        "refused": [],
+        "targets": [{ "repo_id": "living-docs-architect", "allowed": true, "applied_n": 0 }],
+        "github_write": true,
+        "comments_posted": true
+      }
+    },
+    {
+      "case_id": "LDA-037",
+      "kind": "bad",
+      "failure_mode": "extra_entity",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "dogfood_report": {
+        "schema": "living-docs.dogfood_report.v1",
+        "target_n": 1,
+        "requested_n": 0,
+        "refused": [],
+        "targets": [{ "repo_id": "living-docs-architect", "allowed": true, "applied_n": 0 }],
+        "github_write": false,
+        "summary": "F-35 overlay"
+      }
+    },
+    {
+      "case_id": "LDA-038",
+      "kind": "bad",
+      "failure_mode": "dry_run_applied",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "dogfood_report": {
+        "schema": "living-docs.dogfood_report.v1",
+        "dry_run": true,
+        "target_n": 1,
+        "requested_n": 0,
+        "refused": [],
+        "targets": [{ "repo_id": "living-docs-architect", "allowed": true, "applied_n": 2 }],
+        "github_write": false
+      }
+    },
+    {
+      "case_id": "LDA-039",
+      "kind": "bad",
+      "failure_mode": "bad_schema",
+      "expect_verdict": "fail",
+      "expect_act": false,
+      "dogfood_report": {
+        "schema": "living-docs.dogfood_report.v0",
+        "target_n": 1,
+        "requested_n": 0,
+        "refused": [],
+        "targets": [{ "repo_id": "living-docs-architect", "allowed": true, "applied_n": 0 }],
+        "github_write": false
+      }
     }
   ]
 }

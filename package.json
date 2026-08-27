@@ -11,7 +11,9 @@
     "observe": "node src/run.js --observe",
     "architect": "node src/run.js --architect",
     "remediate": "node src/run.js --remediate",
-    "remediate:apply": "node src/run.js --remediate --apply"
+    "remediate:apply": "node src/run.js --remediate --apply",
+    "dogfood": "node src/run.js --dogfood",
+    "dogfood:apply": "node src/run.js --dogfood --apply"
   },
   "engines": {
     "node": ">=20"

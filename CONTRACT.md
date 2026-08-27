@@ -9,7 +9,7 @@
 
 ## Scope
 
-Scan a **public fixture tree** with a small architectural rule set. Produce structured findings. A Meridian-style gate decides which findings are allowed to **act** (would-be comment / issue / living-doc edit). Phase 4 applies gated proposals as **local** living-doc writes (`ARCHITECTURE.md`, `.living-docs/comments.jsonl`). It does not open GitHub issues or post webhooks.
+Scan a **public fixture tree** with a small architectural rule set. Produce structured findings. A Meridian-style gate decides which findings are allowed to **act** (would-be comment / issue / living-doc edit). Phase 5 dogfoods the observer → architect → local remediate loop on **own public family remotes**. Default is dry-run. It does not open GitHub issues or post webhooks.
 
 ### In scope
 
@@ -21,7 +21,8 @@ Scan a **public fixture tree** with a small architectural rule set. Produce stru
 - Scan trigger when observed JS files change
 - Mechanical architect: change event + gated scan → `living-docs.architect_report.v1` with unapplied proposals
 - Gated local remediation: `living-docs.remediation_report.v1` writes `ARCHITECTURE.md` and `.living-docs/comments.jsonl` only when the architect report passed
-- Portfolio-kit D3 on known-bad architect outputs, change events, architect reports, and remediation reports
+- Dogfood: `living-docs.dogfood_report.v1` allowlists public family remotes; refuses HardPowerIntelligence, Meridian, upstream harness, and program trees
+- Portfolio-kit D3 on known-bad architect outputs, change events, architect reports, remediation reports, and dogfood reports
 
 ### Out of scope
 

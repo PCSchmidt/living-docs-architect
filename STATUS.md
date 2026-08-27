@@ -1,7 +1,7 @@
 # Status
 
-**Phase:** 4 — gated local remediation
-**Date:** 2026-08-26
+**Phase:** 5 — dogfood on own public family repos
+**Date:** 2026-08-27
 **Family handoff:** [portfolio-kit docs/STATUS.md](https://github.com/PCSchmidt/portfolio-kit/blob/main/docs/STATUS.md)
 
 ## Done
@@ -11,17 +11,18 @@
 - Mechanical scan + act gate
 - Local git observer (`src/observe.js`)
 - Mechanical architect (`src/architect.js`)
-- Gated local remediation (`src/remediate.js`) — ARCHITECTURE.md + `.living-docs/comments.jsonl`
-- Eval `LDA-001`–`LDA-032`
+- Gated local remediation (`src/remediate.js`)
+- Dogfood allowlist (`src/dogfood.js`) — public family remotes only, dry-run default
+- Eval `LDA-001`–`LDA-039`
 
 ## Last measured
 
-2026-08-26: `npm test` 19/19; D3 catch 1.0 (n=23); agreement 1.0; known-bad never `act`. Remediation reports never `act`. GitHub writes refused.
+2026-08-27: `npm test` 24/24; D3 catch 1.0 (n=28); agreement 1.0; known-bad never `act`. Live dry-run dogfood: 7 family remotes, `applied_n=0`, GitHub writes refused.
 
 ## Not done
 
-- Dogfood on own public family repos (Phase 5)
 - Live GitHub comments / issues / webhooks
 - LLM architect
+- Dogfood on Meridian or HardPowerIntelligence
 
-**Next:** Phase 5 dogfood on own public family repos. Do not start red/blue.
+**Next:** meridian-jspace Phase 1. Do not start red/blue.

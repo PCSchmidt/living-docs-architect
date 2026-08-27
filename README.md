@@ -2,9 +2,9 @@
 
 An observer + architect + remediation loop that treats architectural documentation as agent-managed state.
 
-**Status:** Phase 4 — gated local remediation
+**Status:** Phase 5 — dogfood on own public family repos
 
-Built on Meridian’s gate + independent Evaluator contracts. High-confidence findings only get `act: true`. Phase 4 applies gated proposals to local `ARCHITECTURE.md` and `.living-docs/comments.jsonl`. It never posts GitHub comments, issues, or webhooks.
+Built on Meridian’s gate + independent Evaluator contracts. High-confidence findings only get `act: true`. Phase 5 runs the observer → architect → local remediate loop on allowlisted public family remotes. Default is dry-run. It never posts GitHub comments, issues, or webhooks.
 
 ## Relation to Meridian
 
@@ -39,16 +39,17 @@ npm run observe
 npm run architect
 npm run remediate
 npm run remediate:apply
+npm run dogfood
 ```
 
-Requires Node.js 20+. No dependencies, no network. `npm run remediate` is dry-run. `npm run remediate:apply` writes local living-doc files. `--github-write`, `--comment`, and `--issue` are refused.
+Requires Node.js 20+. No dependencies, no network. `npm run remediate` and `npm run dogfood` are dry-run. `npm run remediate:apply` writes local living-doc files on one repo. `--github-write`, `--comment`, and `--issue` are refused.
 
-## Planned phases
-1. Small rule set (layering, forbidden im(mechanical, no LLM)
-4. Remediation (local ARCHITECTURE.md / comment log) *(this increment)*
-3. Architect agent → structured findings *(this increment; mechanical, no LLM)*
-4. Remediation (comments / issues / ARCHITECTURE.md updates)
-5. Gate so only high-confidence findings act
+## Planned phasesports, required tests)
+2. Local git observer
+3. Architect agent → structured findings (mechanical, no LLM)
+4. Remediation (local ARCHITECTURE.md / comment log)
+5. Dogfood on own public family repos *(this increment)*
+6. Later: Meridian / HardPowerIntelligence only if asked — not this increment
 6. Dogfood on Meridian / this family — not HardPowerIntelligence until asked
 
 ## Public / unclassified data only
@@ -67,6 +68,7 @@ src/gate.js
 src/observe.js
 src/architect.js
 src/remediate.js
+src/dogfood.js
 eval/cases.json
 tests/
 ```

@@ -8,6 +8,6 @@ npm run eval
 ```
 
 - No network, no GitHub writes, no LLM
-- Cases: [cases.json](cases.json) (`LDA-001`–`LDA-032`)
-- Known-bad findings, change events, architect reports, and remediations must not `act`
-- Phase 4 may apply local files; GitHub comments/issues/webhooks stay refused
+- Cases: [cases.json](cases.json) (`LDA-001`–`LDA-039`)
+- Known-bad findings, change events, architect reports, remediations, and dogfood reports must not `act`
+- Phase 5 dogfood is dry-run on allowlisted family remotes; GitHub comments/issues/webhooks stay refused

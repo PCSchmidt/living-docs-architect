@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { architectFromEvent } from './architect.js'
+import { dogfood } from './dogfood.js'
 import { gateReport } from './gate.js'
 import { observeLocal, refuseGitHubWrite } from './observe.js'
 import { remediate } from './remediate.js'
@@ -45,29 +46,49 @@ export function runRemediate(repo, opts = {}) {
   })
 }
 
+export function runDogfood(workspace, opts = {}) {
+  return dogfood({
+    workspace: resolve(workspace),
+    repos: opts.repos,
+    now: opts.now,
+    dryRun: opts.dryRun !== false && opts.apply !== true,
+    apply: opts.apply,
+    fs: opts.fs,
+    runOne: opts.runOne || ((repo, inner) => runRemediate(repo, inner)),
+  })
+}
+
 function parseArgs(argv) {
   const args = argv.slice(2)
   if (args.includes('--github-write') || args.includes('--comment') || args.includes('--issue')) {
     refuseGitHubWrite('cli')
   }
   const apply = args.includes('--apply')
+  const dogfoodFlag = args.includes('--dogfood')
   const remediateFlag = args.includes('--remediate')
   const architect = args.includes('--architect')
   const observe = args.includes('--observe') || architect || remediateFlag
-  const rest = args.filter((arg) => !['--observe', '--architect', '--remediate', '--apply', '--dry-run'].includes(arg))
-  const root = rest[0] || (observe ? process.cwd() : join(HERE, '..', 'fixtures', 'sample-app'))
-  return { architect, observe, remediate: remediateFlag, apply, root }
+  const rest = args.filter((arg) => !['--observe', '--architect', '--remediate', '--dogfood', '--apply', '--dry-run'].includes(arg))
+  const defaultRoot = dogfoodFlag
+    ? join(HERE, '..', '..')
+    : observe
+      ? process.cwd()
+      : join(HERE, '..', 'fixtures', 'sample-app')
+  const root = rest[0] || defaultRoot
+  return { architect, observe, remediate: remediateFlag, dogfood: dogfoodFlag, apply, root, repos: rest.slice(1) }
 }
 
 function main() {
-  const { architect, observe, remediate: doRemediate, apply, root } = parseArgs(process.argv)
-  const report = doRemediate
-    ? runRemediate(root, { dryRun: !apply, apply })
-    : architect
-      ? runArchitect(root)
-      : observe
-        ? runObserve(root)
-        : runScan(root)
+  const { architect, observe, remediate: doRemediate, dogfood: doDogfood, apply, root, repos } = parseArgs(process.argv)
+  const report = doDogfood
+    ? runDogfood(root, { dryRun: !apply, apply, repos: repos.length ? repos : undefined })
+    : doRemediate
+      ? runRemediate(root, { dryRun: !apply, apply })
+      : architect
+        ? runArchitect(root)
+        : observe
+          ? runObserve(root)
+          : runScan(root)
   process.stdout.write(`${JSON.stringify(report, null, 2)}\n`)
 }
 

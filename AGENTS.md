@@ -15,7 +15,7 @@
 ## Do not
 
 - Start redteam-blue-gate.
-- Open GitHub issues or post webhooks. Phase 4 writes local files only.
+- Open GitHub issues or post webhooks. Phase 5 writes local files only, dry-run by default.
 - Put JPO / F-35 content in fixtures except as known-bad eval strings.
-- Add an LLM architect in Phase 4.
-- Run `--apply` against employer or program-of-record trees.
+- Add an LLM architect in Phase 5.
+- Run `--apply` / `--dogfood --apply` against employer, HardPowerIntelligence, Meridian, or program-of-record trees.
