@@ -25,4 +25,4 @@
 - LLM architect
 - Dogfood on Meridian or HardPowerIntelligence
 
-**Next:** meridian-jspace Phase 1. Do not start red/blue.
+**Next:** meridian-jspace Phase 2 or gate-enforced-rag Phase 6. Do not start red/blue.
